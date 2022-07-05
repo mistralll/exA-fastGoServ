@@ -1,7 +1,7 @@
 package main
 
-import "csvUtil"
+import "github.com/mistralll/expAcsv/csvUtil"
 
 func main() {
-	sortCsv("data/geotag-0.csv", "sorted/geotag-0.csv")
+	csvUtil.SortCsv("data/geotag-0.csv", "sorted/geotag-0.csv")
 }

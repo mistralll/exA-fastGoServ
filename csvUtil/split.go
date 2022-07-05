@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func divideCsv(index int) {
+func SplitCsv(index int) {
 	ans := [][]string{}
 
 	f, err := os.Open("geotag/geotag.csv")

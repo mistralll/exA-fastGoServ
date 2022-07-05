@@ -8,7 +8,7 @@ import (
 	"sort"
 )
 
-func sortCsv(inFileName string, outFileName string) {
+func SortCsv(inFileName string, outFileName string) {
 	infile, err := os.Open(inFileName)
 	if err != nil {
 		log.Fatal(err)
