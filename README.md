@@ -2,7 +2,7 @@
 実験A最終課題のリポジトリ。
 ｸｿﾃﾞｶCSVは重すぎるから .gitingore してます。
 
-# データ下処理
+# データ下処理の方針
 ### ソートしてマージ
 1. geotag.csv を id でソートする
 2. tag.csv を tag でソートする
@@ -39,6 +39,21 @@ dataは適当に分割し、（100MBずつくらい？）startからcnt行拾っ
 もはやHTMLを作っておけばよいのでは
 これでO(1)だね！！！
 データが結構な量になるのでオーバーヘッドがすごそう。案2とどっちがいいかな
+
+# 実際のデータの下処理
+main.go の func main () {} 内を書き換えてソートとマージを行う。
+```
+import (
+    "github.com/mistralll/expAcsv/csvUtil"
+    "github.com/mistralll/expAcsv/tagUtil"
+    "github.com/mistralll/expAcsv/geotagUtil"
+)
+func main() {
+    tagUtil.SortCsv(入力ファイル, 保存先)
+    geotagUtil.SortCsv(入力ファイル, 保存先)
+    csvUtil.Merge(ソート済みtag.csvのパス, ソート済みgeotag.csvのパス, 保存先)
+}
+```
 
 
 # パッケージとか
