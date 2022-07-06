@@ -1,4 +1,4 @@
-package csvUtil
+package geotagUtil
 
 import (
 	"encoding/csv"

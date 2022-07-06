@@ -1,12 +1,23 @@
-package csvUtil
+package geotagUtil
 
 import (
 	"encoding/csv"
+	"fmt"
 	"io"
 	"log"
 	"os"
 	"sort"
+	"strconv"
 )
+
+func SortAllCsv() {
+	for i := 0; i < 100; i++ {
+		infile := "data/geotag-" + strconv.Itoa(i) + ".csv"
+		outfile := "sorted/geotag-" + strconv.Itoa(i) + ".csv"
+		SortCsv(infile, outfile)
+		fmt.Println(strconv.Itoa(i) + " is complited!")
+	}
+}
 
 func SortCsv(inFileName string, outFileName string) {
 	infile, err := os.Open(inFileName)
