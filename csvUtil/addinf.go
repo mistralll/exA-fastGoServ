@@ -2,9 +2,11 @@ package csvUtil
 
 import (
 	"encoding/csv"
+	"fmt"
 	"io"
 	"math"
 	"os"
+	"strconv"
 )
 
 func AddInf(tagFileName string, imgFileName string, outfileName string) error {
@@ -91,6 +93,10 @@ func AddInf(tagFileName string, imgFileName string, outfileName string) error {
 
 		if err := outWriter.Error(); err != nil {
 			return err
+		}
+
+		if i%100 == 0 {
+			fmt.Println(strconv.Itoa(i) + " / " + strconv.Itoa(len(tags)))
 		}
 	}
 

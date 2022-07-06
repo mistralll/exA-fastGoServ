@@ -1,7 +1,9 @@
 package main
 
-import "github.com/mistralll/expAcsv/tagUtil"
+import (
+	"github.com/mistralll/expAcsv/csvUtil"
+)
 
 func main() {
-	tagUtil.SortCsv("csv/rowdata/tag.csv", "csv/sorted/tag.csv")
+	csvUtil.AddInf("csv/sorted/tag.csv", "csv/sorted/geotag.csv", "csv/marged/data.csv")
 }
