@@ -1,19 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"log"
-
-	"github.com/mistralll/expAcsv/mergeCsvUtil"
-)
+import "github.com/mistralll/expAcsv/tagUtil"
 
 func main() {
-	line, err := mergeCsvUtil.GetGeotagLine("2054419499")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, row := range line {
-		fmt.Print(row + " ")
-	}
+	tagUtil.SortCsv("csv/rowdata/tag.csv", "csv/sorted/tag.csv")
 }
