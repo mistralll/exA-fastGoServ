@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func AddInf(tagFileName string, imgFileName string, outfileName string) error {
+func Merge(tagFileName string, imgFileName string, outfileName string) error {
 	// read tag.csv
 	tagFile, err := os.Open(tagFileName)
 	if err != nil {
@@ -83,7 +83,7 @@ func AddInf(tagFileName string, imgFileName string, outfileName string) error {
 			}
 		}
 
-		ans := []string{tags[i][0], imgs[ok][0], imgs[ok][1], imgs[ok][2], imgs[ok][3], imgs[ok][4]}
+		ans := []string{tags[i][0], tags[i][1], imgs[ok][1], imgs[ok][2], imgs[ok][3], imgs[ok][4]}
 
 		if err := outWriter.Write(ans); err != nil {
 			return err

@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	csvUtil.AddInf("csv/sorted/tag.csv", "csv/sorted/geotag.csv", "csv/marged/data.csv")
+	csvUtil.Merge("csv/sorted/tag.csv", "csv/sorted/geotag.csv", "csv/merged/data.csv")
 }
