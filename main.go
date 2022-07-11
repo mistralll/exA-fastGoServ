@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	csvUtil.DelEmptyTag("csv/merged/data.csv", "csv/comp/data.csv")
+	csvUtil.DelEmptyTag("csv/comp/data.csv", "csv/comp/sorted.csv")
 }
