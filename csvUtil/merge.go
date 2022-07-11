@@ -83,6 +83,7 @@ func Merge(tagFileName string, imgFileName string, outfileName string) error {
 			}
 		}
 
+		// make new line and write it.
 		ans := []string{tags[i][0], tags[i][1], imgs[ok][1], imgs[ok][2], imgs[ok][3], imgs[ok][4]}
 
 		if err := outWriter.Write(ans); err != nil {
@@ -95,6 +96,7 @@ func Merge(tagFileName string, imgFileName string, outfileName string) error {
 			return err
 		}
 
+		// print progress
 		if i%100 == 0 {
 			fmt.Println(strconv.Itoa(i) + " / " + strconv.Itoa(len(tags)))
 		}

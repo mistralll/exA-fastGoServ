@@ -7,20 +7,13 @@ import (
 	"os"
 )
 
+/*
+	legacy code!
+	このコードは方針転換前のもはや使い道のないコードですが設計の参考に残してあります。
+*/
+
 func SplitAll() {
 	SplitCsv("csv/rowdata/tag.csv", "csv/splitedTag/tag-#.csv", 27)
-	// table := "abcdefghijklmnopqrstuvwxyz#"
-
-	// for i := 0; i < 27; i++ {
-	// 	infile := "csv/rowdata/tag.csv"
-	// 	outfile := "csv/splitedTag/tag-" + table[i:i+1] + ".csv"
-	// 	err := SplitCsv(infile, outfile, i)
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// 	fmt.Println(table[0:i+1] + " is conplited!")
-	// }
-
 }
 
 func SplitCsv(infileName string, outfileName string, index int) error {

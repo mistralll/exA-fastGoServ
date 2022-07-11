@@ -8,6 +8,11 @@ import (
 	"strconv"
 )
 
+/*
+	legacy code
+	このファイルは、方針転換前のcsv下処理用関数です。今は使いませんが設計は流用できます。
+*/
+
 func SplitCsv(index int) {
 	ans := [][]string{}
 
