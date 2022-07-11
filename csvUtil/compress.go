@@ -34,7 +34,7 @@ func DelEmptyTag(infileName string, outfileName string) error {
 			data = append(data, record)
 		}
 
-		if len(data)%1000000 == 0 {
+		if len(data)%1000000 == 0 && len(data) > 0 {
 			fmt.Println(len(data))
 		}
 	}

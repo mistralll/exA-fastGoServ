@@ -17,7 +17,13 @@ id, tag, date-time, x, y, url
 
 ### 無駄なデータの削除とソート
 1. タグが一件もない画像のidを削除
+```
+csvUtil.DelEmptyTag(infileNmae, outfileName)
+```
 2. 第一条件 tag 第二条件 date-time でソート
+```
+csvUtil.SortTagDate(infileName, outfileNmae)
+```
 3. 同じタグの中で100件を超える行を削除
 
 ### ラズパイの検索を最適化（案1）
