@@ -1,0 +1,12 @@
+<html>
+hogehoge
+{{define "main"}}
+    {{for each Image from list as line}}
+        <img src="{{.URL}}"><img>
+        <p>{{line.id}}</p>
+        <p>{{line.locate1}}</p>
+        <p>{{line.locate2}}</p>
+        <p>{{line.date}}</p>
+    {{end}}
+{{end}}
+</html>

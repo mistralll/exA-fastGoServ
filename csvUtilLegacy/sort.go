@@ -1,4 +1,4 @@
-package csvUtil
+package csvUtilLegacy
 
 import (
 	"encoding/csv"
@@ -7,6 +7,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"time"
 )
 
 func SortTagAndDate(infileName string, outfileName string) error {
@@ -33,8 +34,8 @@ func SortTagAndDate(infileName string, outfileName string) error {
 
 		data = append(data, record)
 
-		if len(data)%100000 == 0 && len(data)>0 {
-			fmt.Print("csvUtil.SortTagDate: " + strconv.Itoa(len(data)));
+		if len(data)%100000 == 0 && len(data) > 0 {
+			fmt.Println("csvUtil.SortTagDate: " + strconv.Itoa(len(data)))
 		}
 	}
 
@@ -43,7 +44,10 @@ func SortTagAndDate(infileName string, outfileName string) error {
 		if data[i][1] != data[j][1] {
 			return data[i][1] < data[j][1]
 		} else {
-			return data[i][2] < data[j][2]
+			iTime, _:= time.Parse("2006-01-02 15:04:05", data[i][2])
+			jTime, _:= time.Parse("2006-01-02 15:04:05", data[j][2])
+
+			return iTime.After(jTime)
 		}
 	})
 
@@ -58,14 +62,18 @@ func SortTagAndDate(infileName string, outfileName string) error {
 
 	// write to file
 	for i, record := range data {
-		if err := w.Write(record); err != nil {
+		newLine := []string{record[1], record[2], record[3], record[4], record[5]}
+
+		if err := w.Write(newLine); err != nil {
 			return err
 		}
 
-		if i % 10000 == 0 {
+		if i%10000 == 0 {
 			fmt.Println("csvUtil.SortTagDate: " + strconv.Itoa(i) + " / " + strconv.Itoa(len(data)))
 		}
 	}
+
+	w.Flush()
 
 	return nil
 }

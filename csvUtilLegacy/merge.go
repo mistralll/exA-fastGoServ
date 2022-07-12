@@ -1,4 +1,4 @@
-package csvUtil
+package csvUtilLegacy
 
 import (
 	"encoding/csv"

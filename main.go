@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/mistralll/expAcsv/csvUtil"
+	"github.com/mistralll/expAcsv/serv"
 )
 
 func main() {
-	csvUtil.DelEmptyTag("csv/comp/data.csv", "csv/comp/sorted.csv")
+	serv.ReadData("csv/comp/cmptag01.csv", "csv/comp/cmpimg01.csv")
+	serv.ServRun()
 }
