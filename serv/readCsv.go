@@ -18,8 +18,6 @@ import (
 func ReadData(dataName string) error {
 	fmt.Println("csvReader: now reading data...")
 
-	
-
 	// read tag file
 	infile, err := os.Open(dataName)
 	if err != nil {
