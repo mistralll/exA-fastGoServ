@@ -1,5 +1,8 @@
 package serv
 
+var tags []Tag
+var imgs []Image
+
 type Image struct {
 	id      string
 	date    string

@@ -6,9 +6,6 @@ import (
 	"net/http"
 )
 
-var tags []Tag
-var imgs []Image
-
 func ServRun() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/favicon.ico", faviconHandler)

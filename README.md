@@ -11,7 +11,31 @@
     1. tagをベースに、[id, tag, datetme]を作る
     2. tag, datetimeでソート
     3. 100以降はappendしない
+### tag.csv
+1. date-time情報を付加
+2. tag, date-time でソート
+3. 100件以上あるtag, 空白タグを削除
+4. tagを2行目以降は空白にする
+```
+tag01, id
+tag01, id
+tag01, id
+tag02, id
+tag02, id
+```
+```
+tag01, id
+, id
+, id
+tag02, id
+, id
+```
+これはできた！
 
+### img.csv
+1. URL情報を限界削減する
+2. わんちゃんロケーション削る
+3. tagComped.csv線形探索して一致ゼロなら消す
 
 
 ### ソートしてマージ
