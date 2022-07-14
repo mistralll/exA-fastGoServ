@@ -1,10 +1,19 @@
 package main
 
-import "github.com/mistralll/expAcsv/csvComp"
+import (
+	"log"
+
+	"github.com/mistralll/expAcsv/serv"
+)
 
 func main() {
-	// serv.ReadData("csv/comp/cmptag01.csv", "csv/comp/cmpimg01.csv")
+	serv.TagData = make([]serv.Tag, 6736297)
+	err := serv.ReadData("csv/comp/merged.csv")
+	if err != nil {
+		log.Fatal(err)
+	}
 	// serv.ServRun()
 
-	csvComp.CompSortedTagData("csv/sorted/tagSortedByTagDate.csv", "csv/comp/tagComped.csv")
+	serv.PrintTagData()
+
 }

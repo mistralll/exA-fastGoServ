@@ -1,21 +1,18 @@
 package serv
 
-var tags []Tag
-var imgs []Image
-
 type Image struct {
-	id      string
-	date    string
-	locate1 string
-	locate2 string
-	URL     string
+	Date      string
+	Id        string
+	Location1 string
+	Location2 string
+	URL1      string
+	URL2      string
+	URL3      string
 }
 
 type Tag struct {
-	name string
-	id   string
+	Name string
+	Imgs []Image
 }
 
-type ImageList struct {
-	images []Image
-}
+var TagData []Tag
