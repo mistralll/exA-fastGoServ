@@ -1,3 +1,4 @@
-module github.com/mistralll/expAcsv
+module github.com/mistralll/exA-fastGoServ
+
 
 go 1.17

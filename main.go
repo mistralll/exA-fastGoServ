@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/mistralll/expAcsv/serv"
+	"github.com/mistralll/exA-fastGoServ/serv"
 )
 
 func main() {
