@@ -1,22 +1,18 @@
 package serv
 
-import (
-	"fmt"
-	"strconv"
-)
+import "math"
 
 func Serch(key string) []Image {
-	fmt.Println(key)
-	ans := []Image{}
-	for _, row := range TagData {
-		fmt.Print(row.Name + " ")
-		if row.Name == key {
-			ans = row.Imgs
-			break
+	ok := len(TagData)
+	ng := -1
+	for math.Abs(float64(ok-ng)) > 1 {
+		mid := (ok + ng) / 2
+		if TagData[mid].Name < key {
+			ng = mid
+		} else {
+			ok = mid
 		}
 	}
 
-	fmt.Println(strconv.Itoa(len(ans)))
-
-	return ans
+	return TagData[ok].Imgs
 }

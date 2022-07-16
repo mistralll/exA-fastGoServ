@@ -1,22 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
-	"github.com/mistralll/expAcsv/csvComp"
+	"github.com/mistralll/expAcsv/serv"
 )
 
 func main() {
-	// serv.TagData = make([]serv.Tag, 6736297)
-	// err := serv.ReadData("csv/comp/merged.csv")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// serv.ServRun()
-
-	err := csvComp.CntTagToCsv("csv/comp/tagComped.csv", "csv/cnt/cnt.csv")
+	serv.TagData = make([]serv.Tag, 860621)
+	err := serv.ReadData("csv/cmp/mrg.csv", "csv/cmp/cnt.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	fmt.Println("server is running...")
+	serv.ServRun()
 }

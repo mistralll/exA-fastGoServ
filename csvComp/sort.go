@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func SortTagById(infileName string, outfileName string) error {
+func SortByFirstColumm(infileName string, outfileName string) error {
 	/*
 		This func sort order by first columm
 	*/
