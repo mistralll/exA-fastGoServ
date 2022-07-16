@@ -38,7 +38,7 @@ func CompSortedTagData(infileName string, outfileName string) error {
 			return err
 		}
 
-		if rec[1] != "" {
+		if rec[1] != "" { // if geotag.csv's tag is empty, not append
 			tag = append(tag, rec)
 		}
 	}

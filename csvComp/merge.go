@@ -9,7 +9,7 @@ import (
 )
 
 /*
-	this funcs are make for tag.csv
+	this funcs are made for tag.csv
 */
 
 func AddDateInfToTag(tagfileName string, imgfileName string, outfilieName string) error {

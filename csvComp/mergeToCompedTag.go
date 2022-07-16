@@ -10,6 +10,12 @@ import (
 )
 
 func MergeCsvToCompedTag(tagfileName string, imgfileNmae string, outfileName string) error {
+/*
+	input tag file: [tag, id]
+	input img file: [id, date, loc1, loc2, URL1, URL2, URL3]
+	output merge file: [tag, id, date, loc1, loc2, URL1, URL2, URL3]
+*/
+
 	// read tag.csv
 	tagFile, err := os.Open(tagfileName)
 	if err != nil {

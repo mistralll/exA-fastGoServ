@@ -2,11 +2,8 @@ package csvComp
 
 import (
 	"encoding/csv"
-	"fmt"
 	"io"
-	"math"
 	"os"
-	"strconv"
 )
 
 func SplitURLSub(URL string) [3]string {
@@ -85,108 +82,6 @@ func SplitURLOfImg(infileName string, outfileName string) error {
 	w := csv.NewWriter(outfile)
 
 	for _, rec := range data {
-		if err := w.Write(rec); err != nil {
-			return err
-		}
-	}
-
-	w.Flush()
-
-	if err := w.Error(); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func DelNotUseRow(tagfileName string, imgfileName string, outfileName string) error {
-	/*
-		imgを一行ずつみていき、tagのなかにidが含まれていたらappendします。
-		tagの探索に二分探索を使用しているので、tagファイルは第一要素のidをソートしておいてください。
-		tagファイルにidを見つけたら即appendしているので、空白タグに関しては事前に削除してください。
-	*/
-
-	// read tag file
-	fmt.Println("loading tagfile...")
-	tagFile, err := os.Open(tagfileName)
-	if err != nil {
-		return err
-	}
-	defer tagFile.Close()
-
-	// tag.csv to vec: tag
-	tagReader := csv.NewReader(tagFile)
-	tag := [][]string{}
-
-	for {
-		record, err := tagReader.Read()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return err
-		}
-		tag = append(tag, record)
-	}
-
-	// read img file
-	fmt.Println("loading img file...")
-	imgFile, err := os.Open(imgfileName)
-	if err != nil {
-		return err
-	}
-	defer imgFile.Close()
-
-	// img file to vec: img
-	imgReader := csv.NewReader(imgFile)
-	img := [][]string{}
-
-	cnt := 0
-
-	for {
-		record, err := imgReader.Read()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return err
-		}
-
-		// binary search
-		ok := len(tag)
-		ng := -1
-		key := record[0]
-		for math.Abs(float64(ok-ng)) > 1 {
-			mid := (ok + ng) / 2
-			if tag[mid][1] < key {
-				ng = mid
-			} else {
-				ok = mid
-			}
-		}
-
-		if 0 <= ok && ok < len(tag) {
-			img = append(img, record)
-		}
-
-		// print progres
-		if cnt%100000 == 0 {
-			fmt.Println(strconv.Itoa(cnt))
-		}
-
-		cnt++
-	}
-
-	// write to csv
-	outfile, err := os.Create(outfileName)
-	if err != nil {
-		return err
-	}
-	defer outfile.Close()
-
-	w := csv.NewWriter(outfile)
-
-	for _, rec := range img {
 		if err := w.Write(rec); err != nil {
 			return err
 		}
