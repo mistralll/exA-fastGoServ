@@ -26,7 +26,7 @@ func uintTimeToStr(inuint uint32) (string, error) {
 }
 
 func RetJson(index int, w http.ResponseWriter) error {
-	var sb *strings.Builder
+	sb := &strings.Builder{}
 	sb.WriteString(`{"tag":"`)
 	sb.WriteString(TagData[index].Name)
 	sb.WriteString(`", "results":[`)
