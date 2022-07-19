@@ -2,7 +2,7 @@ package serv
 
 import "math"
 
-func Search(key string) (*Tag, error) {
+func Search(key string) (int, error) {
 	ok := len(TagData)
 	ng := -1
 	for math.Abs(float64(ok-ng)) > 1 {
@@ -13,5 +13,5 @@ func Search(key string) (*Tag, error) {
 			ok = mid
 		}
 	}
-	return &TagData[ok], nil
+	return ok, nil
 }

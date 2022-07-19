@@ -13,7 +13,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	err = RetJson(*ans, w)
+	err = RetJson(ans, w)
 	if err != nil {
 		log.Fatal(err)
 	}

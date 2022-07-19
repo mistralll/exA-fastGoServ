@@ -25,13 +25,13 @@ func uintTimeToStr(inuint uint32) (string, error) {
 	return ans.Format("2006-01-02 15:04:05"), nil
 }
 
-func RetJson(tag Tag, w http.ResponseWriter) error {
+func RetJson(index int, w http.ResponseWriter) error {
 	var sb strings.Builder
 	sb.WriteString(`{"tag":"`)
-	sb.WriteString(tag.Name)
+	sb.WriteString(TagData[index].Name)
 	sb.WriteString(`", "results":[`)
 
-	for i, row := range tag.Imgs {
+	for i, row := range TagData[index].Imgs {
 		sb.WriteString(`{"lat":`)
 		sb.WriteString(strconv.FormatFloat(float64(row.Location1), 'f', 2, 64))
 		sb.WriteString(`,"lon":`)
@@ -51,7 +51,7 @@ func RetJson(tag Tag, w http.ResponseWriter) error {
 		sb.WriteString("_")
 		sb.WriteString(row.URL3)
 		sb.WriteString(`.jpg"}`)
-		if i == len(tag.Imgs)-2 {
+		if i == len(TagData[index].Imgs)-2 {
 			sb.WriteString(`,`)
 		} else {
 			sb.WriteString(`]}`)
