@@ -98,10 +98,10 @@ func ReadData(dataName string, cntName string) error {
 		if err != nil {
 			return err
 		}
-		TagData[tagcnt].Imgs[imgcnt].URL1 = uint32(url1)
+		TagData[tagcnt].Imgs[imgcnt].URL1 = uint8(url1)
 
 		url2, err := strconv.ParseUint(rec[6], 10, 64)
-		TagData[tagcnt].Imgs[imgcnt].URL2 = uint32(url2)
+		TagData[tagcnt].Imgs[imgcnt].URL2 = uint16(url2)
 
 		TagData[tagcnt].Imgs[imgcnt].URL3 = rec[7]
 

@@ -5,8 +5,8 @@ type Image struct {
 	Id        int64
 	Location1 float32
 	Location2 float32
-	URL1      uint32
-	URL2      uint32
+	URL1      uint8
+	URL2      uint16
 	URL3      string
 }
 
