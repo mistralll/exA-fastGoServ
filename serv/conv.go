@@ -51,3 +51,19 @@ func ImageToRetImg(img Image) (RetImg, error) {
 
 	return ans, nil
 }
+
+func TagToRetTag(tag Tag)(RetTag, error) {
+	ans := RetTag{}
+	ans.tag = tag.Name
+	ans.results = make([]RetImg, len(tag.Imgs))
+
+	for i, row := range tag.Imgs {
+		tmp, err := ImageToRetImg(row)
+		if err != nil {
+			return RetTag{}, err
+		}
+		ans.results[i] = tmp
+	}
+
+	return ans, nil
+}

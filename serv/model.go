@@ -22,7 +22,7 @@ type RetImg struct {
 	url  string
 }
 
-type RetJson struct {
+type RetTag struct {
 	tag     string
 	results []RetImg
 }
