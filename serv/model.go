@@ -16,15 +16,15 @@ type Tag struct {
 }
 
 type RetImg struct {
-	lat  string
-	lon  string
-	date string
-	url  string
+	Lat  float32 `json:"lat,omitempty"`
+	Lon  float32 `json:"lon,omitempty"`
+	Date string `json:"date,omitempty"`
+	Url  string `json:"url,omitempty"`
 }
 
 type RetTag struct {
-	tag     string
-	results []RetImg
+	Tag     string   `json:"tag,omitempty"`
+	Results []RetImg `json:"results,omitempty"`
 }
 
 var TagData []Tag

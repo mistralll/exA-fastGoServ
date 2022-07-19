@@ -1,6 +1,7 @@
 package serv
 
 import (
+	"net/http"
 	"strconv"
 	"strings"
 	"time"
@@ -31,9 +32,9 @@ func ImageToRetImg(img Image) (RetImg, error) {
 		return ans, err
 	}
 
-	ans.date = d
-	ans.lat = strconv.FormatFloat(float64(img.Location1), 'f', 2, 64)
-	ans.lon = strconv.FormatFloat(float64(img.Location2), 'f', 2, 64)
+	ans.Date = d
+	ans.Lat = img.Location1
+	ans.Lon = img.Location2
 
 	var sb strings.Builder
 
@@ -47,22 +48,22 @@ func ImageToRetImg(img Image) (RetImg, error) {
 	sb.WriteString(img.URL3)
 	sb.WriteString(".jpg")
 
-	ans.url = sb.String()
+	ans.Url = sb.String()
 
 	return ans, nil
 }
 
-func TagToRetTag(tag Tag)(RetTag, error) {
+func TagToRetTag(tag Tag) (RetTag, error) {
 	ans := RetTag{}
-	ans.tag = tag.Name
-	ans.results = make([]RetImg, len(tag.Imgs))
+	ans.Tag = tag.Name
+	ans.Results = make([]RetImg, len(tag.Imgs))
 
 	for i, row := range tag.Imgs {
 		tmp, err := ImageToRetImg(row)
 		if err != nil {
 			return RetTag{}, err
 		}
-		ans.results[i] = tmp
+		ans.Results[i] = tmp
 	}
 
 	return ans, nil
@@ -71,15 +72,53 @@ func TagToRetTag(tag Tag)(RetTag, error) {
 func RetTagToHTML(tag RetTag) string {
 	var sb strings.Builder
 	sb.WriteString("<html>")
-	sb.WriteString(tag.tag)
-	for _, row := range tag.results {
+	sb.WriteString(tag.Tag)
+	for _, row := range tag.Results {
 		sb.WriteString("<img src=")
-		sb.WriteString(row.url)
+		sb.WriteString(row.Url)
 		sb.WriteString("></img>")
-		sb.WriteString(row.date)
-		sb.WriteString(row.lat)
-		sb.WriteString(row.lon)
+		sb.WriteString(row.Date)
+		sb.WriteString(strconv.FormatFloat(float64(row.Lat), 'f', 2, 10))
+		sb.WriteString(strconv.FormatFloat(float64(row.Lon), 'f', 2, 10))
 	}
 	sb.WriteString("</html>")
 	return sb.String()
-} 
+}
+
+func RetJson(tag Tag, w http.ResponseWriter) error {
+	var sb strings.Builder
+	sb.WriteString(`{"tag":"`)
+	sb.WriteString(tag.Name)
+	sb.WriteString(`", "results":[`)
+
+	for i, row := range tag.Imgs {
+		sb.WriteString(`{"lat":`)
+		sb.WriteString(strconv.FormatFloat(float64(row.Location1), 'f', 2, 64))
+		sb.WriteString(`,"lon":`)
+		sb.WriteString(strconv.FormatFloat(float64(row.Location2), 'f', 2, 64))
+		sb.WriteString(`,"date":"`)
+		d, err := uintTimeToStr(row.Date)
+		if err != nil {
+			return err
+		}
+		sb.WriteString(d)
+		sb.WriteString(`","url":":http://farm`)
+		sb.WriteString(strconv.FormatUint(uint64(row.URL1), 10))
+		sb.WriteString(`.static.flickr.com/`)
+		sb.WriteString(strconv.FormatUint(uint64(row.URL2), 10))
+		sb.WriteString("/")
+		sb.WriteString(strconv.FormatInt(row.Id, 10))
+		sb.WriteString("_")
+		sb.WriteString(row.URL3)
+		sb.WriteString(`.jpg"}`)
+		if i == len(tag.Imgs)-2 {
+			sb.WriteString(`,`)
+		} else {
+			sb.WriteString(`]}`)
+		}
+	}
+
+	w.Write([]byte(sb.String()))
+
+	return nil
+}

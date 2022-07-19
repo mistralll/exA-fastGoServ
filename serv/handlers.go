@@ -8,12 +8,15 @@ import (
 func handler(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("tag")
 
-	ans, err := Serch(q)
+	ans, err := Search(q)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	w.Write([]byte(RetTagToHTML(ans)))
+	err = RetJson(*ans, w)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {}
