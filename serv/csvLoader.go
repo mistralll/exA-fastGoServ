@@ -107,6 +107,7 @@ func ReadData(dataName string, cntName string) error {
 
 		imgcnt++
 	}
+	runtime.GC()
 	fmt.Println("csvLoader: complited!")
 	return nil
 }

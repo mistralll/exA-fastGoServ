@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"runtime"
 
 	"github.com/mistralll/exA-fastGoServ/serv"
 )
@@ -13,6 +14,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	runtime.GC()
 	fmt.Println("server is running...")
 	serv.ServRun()
 }
