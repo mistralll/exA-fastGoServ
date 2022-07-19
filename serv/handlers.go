@@ -5,15 +5,18 @@ import (
 	"net/http"
 )
 
+var tagAns int
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("tag")
 
-	ans, err := Search(q)
+	var err error
+	tagAns, err = Search(q)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = RetJson(ans, w)
+	err = RetJson(tagAns, w)
 	if err != nil {
 		log.Fatal(err)
 	}
