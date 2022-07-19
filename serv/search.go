@@ -13,6 +13,5 @@ func Serch(key string) []Image {
 			ok = mid
 		}
 	}
-
 	return TagData[ok].Imgs
 }

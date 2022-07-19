@@ -3,7 +3,6 @@ package serv
 import (
 	"log"
 	"net/http"
-	"strconv"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -16,22 +15,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	`))
 
 	for _, row := range list {
-		w.Write([]byte(`<img src=http://farm`))
-		w.Write([]byte(strconv.FormatUint(uint64(row.URL1), 10)))
-		w.Write([]byte(`.static.flickr.com/`))
-		w.Write([]byte(strconv.FormatUint(uint64(row.URL2), 10)))
-		w.Write([]byte(`/`))
-		w.Write([]byte(strconv.FormatInt(row.Id, 10)))
-		w.Write([]byte(`_`))
-		w.Write([]byte(row.URL3))
-		w.Write([]byte(`.jpg"></img>`))
-		datetmp, err := uintTimeToStr(row.Date)
+		tmp, err := ImageToRetImg(row)
 		if err != nil {
 			log.Fatal(err)
 		}
-		w.Write([]byte(datetmp))
-		w.Write([]byte(strconv.FormatFloat(float64(row.Location1), 'f', 2, 64)))
-		w.Write([]byte(strconv.FormatFloat(float64(row.Location2), 'f', 2, 64)))
+		w.Write([]byte(`<img src=`))
+		w.Write([]byte(tmp.url))
+		w.Write([]byte(`></img>`))
+		w.Write([]byte(tmp.lat))
+		w.Write([]byte(tmp.lon))
+		w.Write([]byte(tmp.date))
 	}
 	w.Write([]byte(`</body></html>`))
 }

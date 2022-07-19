@@ -15,4 +15,16 @@ type Tag struct {
 	Imgs []Image
 }
 
+type RetImg struct {
+	lat  string
+	lon  string
+	date string
+	url  string
+}
+
+type RetJson struct {
+	tag     string
+	results []RetImg
+}
+
 var TagData []Tag
