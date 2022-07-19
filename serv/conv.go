@@ -67,3 +67,19 @@ func TagToRetTag(tag Tag)(RetTag, error) {
 
 	return ans, nil
 }
+
+func RetTagToHTML(tag RetTag) string {
+	var sb strings.Builder
+	sb.WriteString("<html>")
+	sb.WriteString(tag.tag)
+	for _, row := range tag.results {
+		sb.WriteString("<img src=")
+		sb.WriteString(row.url)
+		sb.WriteString("></img>")
+		sb.WriteString(row.date)
+		sb.WriteString(row.lat)
+		sb.WriteString(row.lon)
+	}
+	sb.WriteString("</html>")
+	return sb.String()
+} 
